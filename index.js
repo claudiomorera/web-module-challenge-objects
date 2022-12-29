@@ -14,13 +14,22 @@ The function should:
   
   Example createMenuItem('tacos', 8, 'Lunch') should return {name: 'tacos', price: 8, category: 'Lunch'}
 */
+/*another way to write the function is:
 
-
-function createMenuItem(/*Your code here*/){
-  /*Your code here*/
+function createMenuItem(name, price, category){
+  return {name, price, category};
 }
 
+createMenuItem('tacos', 8, 'Lunch');
 
+*/
+
+function createMenuItem(foodName, foodPrice, foodCat){
+  const tacos = {name:foodName, price:foodPrice, category:foodCat};
+  return tacos;
+}
+
+createMenuItem('tacos', 8, 'Lunch');
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1b (not auto-tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Invoke your function!
@@ -31,9 +40,9 @@ Test your createMenuItems function by doing the following:
   
   For example: createMenuItem("pizza",5,"lunch") would return this as the object: {name:"Pizza",price:5,category:"lunch"}
 */
-
-
-
+createMenuItem('CheeseBurger', 8, 'Lunch');
+createMenuItem('Pizza', 5, 'Lunch');
+createMenuItem('Grits', 3, 'Breakfast');
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to the burger object below that automatically calculates price depending on the string received as a parameter. 
 
@@ -51,10 +60,16 @@ const burger = {
   name: "Burger", 
   price: 18, 
   category: "Lunch", 
-  
+  discount: function (customer) {
+	  if (customer === "teacher" || customer === "student"){
+		  return this.price - (this.price * 0.25);
+	  } else if (customer === "public") {
+		  return this.price - (this.price * 0.10);
+	  } else {return "no discount, pay the total of: " + this.price;}
+  }
 }
 
-
+burger.discount("teacher");
 
 ///////////////Reviews (MVP)///////////////////
 const reviews = [
@@ -72,7 +87,7 @@ const reviews = [
 Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
-
+console.log(reviews[reviews.length - 3].feedback);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4 (not auto-tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -81,7 +96,8 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   2. log the reviews array to the console to check your work
 */
 
-
+reviews[reviews.length - 1].feedback = "this place is chill with really cool people, great for getting work done on weekdays";
+console.log(reviews[reviews.length - 1]);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function that creates an object with name, rating, feedback, add the new review to the end of an array and returns the resulting array. 
@@ -95,11 +111,12 @@ Use the addReview function below to do the following:
 */
 
 
-function addReview(/*Your Code Here */){
-  /*Your Code Here */
+function addReview(array, iname, irating, ifeedback){
+  array.push({name:iname, rating:irating, feedback:ifeedback});
+  return array;
 }
 
-
+addReview(reviews, 'Billy', 2, 'Lame food!');
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function to return a review based on the index of the review in the array.
@@ -112,10 +129,10 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(array, x) {
+  return `${array[x].name} gave the restaurant a ${array[x].rating} star review, and their feedback was: ${array[x].feedback}`;
 }
-
+getReviewByIndex(reviews, 0)
   
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -131,10 +148,11 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(array, x) {
+  return `${array[x].name} gave the restaurant a ${array[x].rating} star review, and their feedback was: ${array[x].feedback}`;
+  
 } 
-
+getLastReview(reviews, reviews.length - 1);
 
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
@@ -153,10 +171,14 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
+ function getReviewByRating(array, rating) {
+	let x = 4; 
+	
+    if (rating <= x) {
+		return rating;
+	}
   }
-
+getReviewByRating(reviews, 4);
   
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
 Use the getLongReviews function below to do the following:
@@ -171,10 +193,12 @@ Use the getLongReviews function below to do the following:
   ]
 */
 
-function getLongReviews(/* code here */) {
-    /* code here */
-  }
-  
+function getLongReviews(array) {
+  if (array.feedback >= 15){
+	  return array.feedback;
+   } 
+}
+getLongReviews(reviews);
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
 This stretch goal does not use the reviews data!  You create your own object in this stretch goal.
@@ -194,11 +218,10 @@ Use the carMaker function below to do the following:
 */
 
 
-function carMaker(/* code here */) {
-    /* code here */
-    
+function carMaker(odometer) {
+  const car = {odometer:null, drive:function(){}};
 }
-
+carMaker();
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
 function foo(){
